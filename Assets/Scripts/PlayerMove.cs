@@ -8,7 +8,10 @@ public class PlayerMove : MonoBehaviour
     private float LeftRight;
     private float ForwardBack;
     private float Speed=10.0f;
-    private float rotateSpeed = 50.0f;
+    private float rotateSpeed = 90.0f;
+    private float chargeBar = 0;
+    public GameObject Projectile;
+    public GameObject shield;
     void Start()
     {
         
@@ -27,6 +30,23 @@ public class PlayerMove : MonoBehaviour
         {
             transform.Rotate(Vector3.up*rotateSpeed*Time.deltaTime*LeftRight);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(Projectile, transform.position, transform.rotation);
+        }
         
+        if (Input.GetKey(KeyCode.Space))
+        {
+            chargeBar++;
+        }
+        else
+        {
+            chargeBar = 0;
+        }
+        if (chargeBar >= 180)
+        {
+            Instantiate(shield, transform.position, transform.rotation);
+            chargeBar = 0;
+        }
     }
 }
