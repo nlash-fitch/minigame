@@ -43,9 +43,9 @@ public class PlayerMove : MonoBehaviour
         {
             chargeBar = 0;
         }
-        if (chargeBar >= 360)
+        if (chargeBar >= 1200)
         {
-            Instantiate(shield, transform.position, transform.rotation);
+            Instantiate(shield, transform.position+transform.up, transform.rotation);
             chargeBar = 0;
         }
     }
