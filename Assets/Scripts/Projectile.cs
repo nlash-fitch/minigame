@@ -20,4 +20,8 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("1");
+    }
 }
