@@ -36,9 +36,12 @@ public class CreatureMove : MonoBehaviour
         {
             transform.Translate(-Vector3.forward * speed * Time.deltaTime);
         }
+        
+    }
+    private void FixedUpdate()
+    {
         chargeBar++;
-        if (chargeBar >= 1200)
-        {
+        if (chargeBar >= 200) {
             Instantiate(Projectile, transform.position, transform.rotation);
             chargeBar = 0;
         }
