@@ -8,15 +8,22 @@ public class CreatureMove : MonoBehaviour
     private int speed = 20;
     private int chargeBar = 0;
     public GameObject Projectile;
+
+    public GameManager GameManager;
+    public GameObject me;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.GameStart) {
+            Destroy(me);
+        }
         transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, player.transform.position - transform.position, 1, 1));
         transform.rotation.Set(0.0f, transform.rotation[1], 0.0f, transform.rotation[3]);
 
