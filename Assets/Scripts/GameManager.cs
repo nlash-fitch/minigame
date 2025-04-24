@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player;
     public TextMeshProUGUI score;
+    public int scoreCount;
     public GameObject MainMenu;
     public GameObject Creature;
     public bool GameStart;
@@ -30,13 +31,16 @@ public class GameManager : MonoBehaviour
     {
         if(GameStart) {
             spawnTimer++;
-            if(spawnTimer > 150) {
+            if(spawnTimer > 100) {
                 spawnTimer = 0;
-                int Z = Random.Range(-1, 1);
-                if (Z == 0) {
-                    Z++;
+                int spawns = Random.Range(1, 3);
+                for(int i = 0; i < spawns; i++) {
+                    int Z = Random.Range(-1, 1);
+                    if (Z == 0) {
+                        Z++;
+                    }
+                    Instantiate(Creature, new Vector3(Random.Range(-20, 20), 0.5f, 18 * Z), Quaternion.identity);
                 }
-                Instantiate(Creature, new Vector3(Random.Range(-20, 20), 0.5f, 18*Z), Quaternion.identity);
             }
         }
     }
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
         GameStart = true;
         lives = 3;
         lifeCounter.text = "Lives: " + lives;
+        scoreCount = 0;
+        score.text = "Score: " + scoreCount;
     }
 
     public void GameOver()
@@ -59,7 +65,12 @@ public class GameManager : MonoBehaviour
 
     public void addScore(int Added)
     {
-
+        scoreCount += Added;
+        score.text = score.text = "Score: " + scoreCount;
+        if(scoreCount%50 == 0) {
+            lives++;
+            lifeCounter.text = "Lives: " + lives;
+        }
     }
 
     public void PlayerHurt()

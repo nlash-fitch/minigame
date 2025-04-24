@@ -43,4 +43,12 @@ public class CreatureMove : MonoBehaviour
             chargeBar = 0;
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "playerP") {
+            Destroy(me);
+            GameManager.addScore(5);
+        }
+    }
 }
